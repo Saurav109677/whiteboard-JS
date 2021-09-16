@@ -1,0 +1,21 @@
+*{
+    box-sizing: border-box;
+}
+
+html,body{
+    margin:0px;
+}
+
+.tools{
+    background-color: aquamarine;
+    height: 100px;
+}
+
+.content{
+
+}
+
+#canvas{
+    height: 100%;
+    width: 100%;
+}
