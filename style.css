@@ -65,6 +65,7 @@ html,body{
     display: flex;
     justify-content: space-evenly;
     margin-top: 10px;
+    align-items: center;
 }
 
 .eraser-dropdown{
@@ -80,7 +81,7 @@ html,body{
 
 }
 
-#red-pencil{
+.red-pencil{
     width: 25px;
     height: 25px;
     border: 1px solid;
@@ -89,7 +90,7 @@ html,body{
     background-color: red;
 }
 
-#green-pencil{
+.green-pencil{
     width: 25px;
     height: 25px;
     border: 1px solid;
@@ -97,12 +98,20 @@ html,body{
     background-color: lightgreen;
 }
 
-#blue-pencil{
+.blue-pencil{
     width: 25px;
     height: 25px;
     border: 1px solid;
     border-radius: 15px;
     background: blue;
+}
+
+.black-pencil{
+    width: 25px;
+    height: 25px;
+    border: 1px solid;
+    border-radius: 15px;
+    background: black;
 }
 
 #eraser{
@@ -118,4 +127,10 @@ html,body{
     padding: 12px;
     height: 75px;
     border-radius: 18px;
+}
+
+.selected-color{
+    border: 4px solid yellow;
+    height: 30px;
+    width: 30px;
 }

@@ -14,13 +14,14 @@
                 <img src="./resources/tool-box-images/pencil.svg" class="tool-img active-tool" title="pencil">
                 <div class="tool-option hide" id="pencil-dropdown">
                     <div class="pencil-size">
-                        <input type="range" min="20" max="60" id="pencil-slider">
+                        <input type="range" min="1" max="40" value="1" id="pencil-slider">
                     </div>
                     <hr>
                     <div class="pencil-color">
-                        <div id="red-pencil"></div>
-                        <div id="green-pencil"></div>
-                        <div id="blue-pencil"></div>
+                        <div class="red-pencil"></div>
+                        <div class="green-pencil"></div>
+                        <div class="blue-pencil"></div>
+                        <div class="black-pencil selected-color" ></div>
                     </div>
                 </div>
             </div>
@@ -28,7 +29,7 @@
                 <img src="./resources/tool-box-images/eraser.svg" class="tool-img" title="eraser">
                 <div class="tool-option hide" id="eraser-dropdown">
                     <div class="eraser-size">
-                            <input type="range" id="eraser-slider">
+                            <input type="range" id="eraser-slider" min="1" max="40" value="1">
                     </div>
                 </div>
             </div>

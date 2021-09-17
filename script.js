@@ -6,6 +6,8 @@ let topOffset=canvas.getBoundingClientRect().top;
 let isPenDown = false;
 let lastDrawingDB = [];
 let pointsDB = [];
+let lastSelectedColor = "black";
+let lastSelectedWidth = "1";
 
 let eraserImg = document.querySelector(".tool img[title='eraser']");
 let pencilImg = document.querySelector(".tool img[title='pencil']");
@@ -14,6 +16,55 @@ let undoImg = document.querySelector(".tool img[title='undo']");
 let pencilDropdown = document.querySelector("#pencil-dropdown");
 let eraserDropdown = document.querySelector("#eraser-dropdown");
 let pencilSlider = document.querySelector("#pencil-slider");
+let eraserSlider = document.querySelector("#eraser-slider");
+let redPencil = document.querySelector(".red-pencil");
+let greenPencil = document.querySelector(".green-pencil");
+let bluePencil = document.querySelector(".blue-pencil");
+let blackPencil = document.querySelector(".black-pencil");
+
+redPencil.addEventListener("click",function(){
+    redPencil.classList.add("selected-color");
+    bluePencil.classList.remove("selected-color");
+    greenPencil.classList.remove("selected-color");
+    blackPencil.classList.remove("selected-color");
+    ctx.strokeStyle = "red";
+    lastSelectedColor = "red";
+})
+
+greenPencil.addEventListener("click",function(){
+    ctx.strokeStyle = "lightgreen";
+    greenPencil.classList.add("selected-color");
+    bluePencil.classList.remove("selected-color");
+    redPencil.classList.remove("selected-color");
+    blackPencil.classList.remove("selected-color");
+    lastSelectedColor = "green";
+})
+
+bluePencil.addEventListener("click",function(){
+    bluePencil.classList.add("selected-color");
+    redPencil.classList.remove("selected-color");
+    greenPencil.classList.remove("selected-color");
+    blackPencil.classList.remove("selected-color");
+    ctx.strokeStyle = "blue";
+    lastSelectedColor = "blue";
+})
+
+blackPencil.addEventListener("click",function(){
+    ctx.strokeStyle = "black";
+    blackPencil.classList.add("selected-color");
+    bluePencil.classList.remove("selected-color");
+    greenPencil.classList.remove("selected-color");
+    redPencil.classList.remove("selected-color");
+    lastSelectedColor = "black";
+})
+
+pencilSlider.addEventListener("change",function(){
+    ctx.lineWidth = pencilSlider.value;
+})
+
+eraserSlider.addEventListener("change",function(){
+    ctx.lineWidth = eraserSlider.value;
+})
 
 eraserImg.addEventListener("click",function(){
     if(!eraserImg.classList.contains("active-tool")){
@@ -21,6 +72,8 @@ eraserImg.addEventListener("click",function(){
         eraserImg.classList.add("active-tool");
         pencilDropdown.classList.add("hide");
         eraserDropdown.classList.add("hide");
+        ctx.lineWidth = 1;
+        eraserSlider.value = 1;
         ctx.strokeStyle = "white";
         // ctx.lineWidth = 100;
     }
@@ -46,8 +99,11 @@ pencilImg.addEventListener("click",function(){
         eraserDropdown.classList.add("hide");
         pencilDropdown.classList.add("hide");
         // set default stroke color to black
+        ctx.lineWidth = 1;
+        pencilSlider.value = 1;
         ctx.strokeStyle = "black";
         // ctx.lineWidth = 100;
+        
     }
     else{
         
@@ -55,8 +111,6 @@ pencilImg.addEventListener("click",function(){
             // next click then open the dropdwon
             pencilDropdown.classList.remove("hide");
             eraserDropdown.classList.add("hide");
-            // set pencilsize
-            console.log(pencilSlider);
        }
        else{
            pencilDropdown.classList.add("hide")
@@ -71,13 +125,18 @@ redoImg.addEventListener("click",function(){
         draw(points);
         pointsDB.push(points);
         // lastDrawingDB = lastDrawingDB.shift();
-        console.log("redo");
+        console.log("redo",lastDrawingDB);
     }
+    // else{
+    //     ctx.strokeStyle = lastSelectedColor ;
+    // }
     
 })
 
 function draw(points){
     for(let i=0;i<points.length;i++){
+        ctx.strokeStyle = points[i].contextStyle;
+        ctx.lineWidth = points[i].contextWidth;
         let x = points[i].x;
         let y = points[i].y;
             if(i==0){
@@ -100,14 +159,19 @@ undoImg.addEventListener("click",function(){
         ctx.clearRect(0,0,canvas.width,canvas.height);
         // re-draw the drawing except the last one
         reDraw();
-        console.log("undo");
+        console.log("undo",pointsDB);
     }
+    // else{
+    //     ctx.strokeStyle = lastSelectedColor ;
+    // }
     
 })
 
 function reDraw(){
     for(let i=0;i<pointsDB.length;i++){
         for(let j=0;j<pointsDB[i].length;j++){
+            ctx.strokeStyle = pointsDB[i][j].contextStyle;
+            ctx.lineWidth = pointsDB[i][j].contextWidth;
             let x = pointsDB[i][j].x;
             let y = pointsDB[i][j].y;
             if(j==0){
@@ -129,6 +193,12 @@ window.addEventListener("resize",function(){
 
 let pointsObj = [];
 canvas.addEventListener("mousedown",function(e){
+
+    // closing the dropdown if open
+    pencilDropdown.classList.add("hide")
+    eraserDropdown.classList.add("hide")
+    ctx.strokeStyle = lastSelectedColor ;
+
     let x = e.clientX;
     let y = e.clientY-topOffset;
 
@@ -141,7 +211,9 @@ canvas.addEventListener("mousedown",function(e){
     pointsObj.push({
         id: "md",
         x,
-        y
+        y,
+        contextStyle: ctx.strokeStyle,
+        contextWidth: ctx.lineWidth
     });
 
 })
@@ -158,7 +230,9 @@ canvas.addEventListener("mousemove",function(e){
         pointsObj.push({
             id: "mm",
             x,
-            y
+            y,
+            contextStyle: ctx.strokeStyle,
+            contextWidth: ctx.lineWidth
         })
     }
     
@@ -168,5 +242,5 @@ canvas.addEventListener("mouseup",function(e){
     isPenDown = false;
     pointsDB.push(pointsObj);
     pointsObj = [];
-    // console.log(pointsDB);
+    console.log("mouseup",pointsDB);
 })
