@@ -8,7 +8,44 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <div class="tools"></div>
+    <div class="tools">
+        <div class="tool-box">
+            <div class="tool" id="pencil">
+                <img src="./resources/tool-box-images/pencil.svg" class="tool-img active-tool" title="pencil">
+                <div class="tool-option hide" id="pencil-dropdown">
+                    <div class="pencil-size">
+                        <input type="range" min="20" max="60" id="pencil-slider">
+                    </div>
+                    <hr>
+                    <div class="pencil-color">
+                        <div id="red-pencil"></div>
+                        <div id="green-pencil"></div>
+                        <div id="blue-pencil"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="tool" id="eraser">
+                <img src="./resources/tool-box-images/eraser.svg" class="tool-img" title="eraser">
+                <div class="tool-option hide" id="eraser-dropdown">
+                    <div class="eraser-size">
+                            <input type="range" id="eraser-slider">
+                    </div>
+                </div>
+            </div>
+            <div class="tool">
+                <img src="./resources/tool-box-images/sticky.svg" class="tool-img">
+            </div>
+            <div class="tool">
+                <img src="./resources/tool-box-images/file-upload.svg" class="tool-img">
+            </div>
+            <div class="tool">
+                <img src="./resources/tool-box-images/undo.svg" class="tool-img" title="undo">
+            </div>
+            <div class="tool">
+                <img src="./resources/tool-box-images/redo.svg" class="tool-img" title="redo">
+            </div>
+        </div>
+    </div>
     <div class="content">
         <canvas id="canvas"></canvas>
     </div>
