@@ -134,3 +134,54 @@ html,body{
     height: 30px;
     width: 30px;
 }
+
+.sticky{
+    position: absolute;
+    left: 20%;
+    width: 225px;
+    top:20%;
+}
+
+.sticky-header{
+    background: lightgrey;
+    height: 30px;
+    opacity: 0.6;
+    display: flex;
+    /* align-items: center; */
+    justify-content: flex-end;
+    align-items: center;
+    border: 1px solid grey;
+    width:100%
+}
+
+.sticky-content{
+
+}
+
+.minimize{
+    border: 1px solid;
+    height: 80%;
+    width: 25px;
+    border-radius: 34px;
+    background: lightgreen;
+    margin-right: 7px;
+}
+
+.close{
+    border: 1px solid;
+    height: 80%;
+    width: 25px;
+    border-radius: 34px;
+    margin-right: 6px;
+    /* margin-left: -7px; */
+    background: indianred;
+}
+
+.sticky-content textarea{
+    background: white;
+    margin: 0px;
+    max-width: 225px;
+    min-width: 225px;
+    height: 210px;
+    border: 1px solid lightgrey;
+}

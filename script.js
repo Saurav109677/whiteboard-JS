@@ -21,7 +21,7 @@ let redPencil = document.querySelector(".red-pencil");
 let greenPencil = document.querySelector(".green-pencil");
 let bluePencil = document.querySelector(".blue-pencil");
 let blackPencil = document.querySelector(".black-pencil");
-
+let isEraser = false;
 redPencil.addEventListener("click",function(){
     redPencil.classList.add("selected-color");
     bluePencil.classList.remove("selected-color");
@@ -37,7 +37,7 @@ greenPencil.addEventListener("click",function(){
     bluePencil.classList.remove("selected-color");
     redPencil.classList.remove("selected-color");
     blackPencil.classList.remove("selected-color");
-    lastSelectedColor = "green";
+    lastSelectedColor = "lightgreen";
 })
 
 bluePencil.addEventListener("click",function(){
@@ -67,6 +67,7 @@ eraserSlider.addEventListener("change",function(){
 })
 
 eraserImg.addEventListener("click",function(){
+    isEraser = true;
     if(!eraserImg.classList.contains("active-tool")){
         pencilImg.classList.remove("active-tool");
         eraserImg.classList.add("active-tool");
@@ -93,6 +94,7 @@ eraserImg.addEventListener("click",function(){
 
 
 pencilImg.addEventListener("click",function(){
+    isEraser = false;
     if(!pencilImg.classList.contains("active-tool")){
         eraserImg.classList.remove("active-tool");
         pencilImg.classList.add("active-tool");
@@ -197,7 +199,10 @@ canvas.addEventListener("mousedown",function(e){
     // closing the dropdown if open
     pencilDropdown.classList.add("hide")
     eraserDropdown.classList.add("hide")
-    ctx.strokeStyle = lastSelectedColor ;
+    if(!isEraser)
+        ctx.strokeStyle = lastSelectedColor ;
+    else    
+    ctx.strokeStyle = "white" ;
 
     let x = e.clientX;
     let y = e.clientY-topOffset;
