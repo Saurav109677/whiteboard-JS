@@ -21,7 +21,30 @@ let redPencil = document.querySelector(".red-pencil");
 let greenPencil = document.querySelector(".green-pencil");
 let bluePencil = document.querySelector(".blue-pencil");
 let blackPencil = document.querySelector(".black-pencil");
+let toggleTools = document.querySelector(".toggle-tools");
+let toolBox = document.querySelector(".tool-box");
+let closeIcon = document.querySelector("#close");
+let show = document.querySelector("#show");
+
+
 let isEraser = false;
+let isToolHide = false;
+
+toggleTools.addEventListener("click",function(){
+    if(isToolHide==false){
+        toolBox.classList.add("hide");
+        show.style.display = "block";
+        closeIcon.style.display = "none";
+    }
+    else{    
+        toolBox.classList.remove("hide");
+        // toolBox.classList.add("add-animation");
+        show.style.display = "none";
+        closeIcon.style.display = "block";
+    }
+    isToolHide=!isToolHide;
+})
+
 redPencil.addEventListener("click",function(){
     redPencil.classList.add("selected-color");
     bluePencil.classList.remove("selected-color");
