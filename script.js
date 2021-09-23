@@ -84,6 +84,7 @@ blackPencil.addEventListener("click",function(){
 
 pencilSlider.addEventListener("change",function(){
     ctx.lineWidth = pencilSlider.value;
+    lastSelectedWidth = pencilSlider.value;
 })
 
 eraserSlider.addEventListener("change",function(){
@@ -223,8 +224,11 @@ canvas.addEventListener("mousedown",function(e){
     // closing the dropdown if open
     pencilDropdown.classList.add("hide")
     eraserDropdown.classList.add("hide")
-    if(!isEraser)
+    if(!isEraser){
         ctx.strokeStyle = lastSelectedColor ;
+        ctx.lineWidth = lastSelectedWidth;
+        pencilSlider.setAttribute("value",lastSelectedWidth)
+    }
     else    
     ctx.strokeStyle = "white" ;
 
