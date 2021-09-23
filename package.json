@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "electron": "^14.0.1"
+    "electron": "^14.0.1",
+    "socket.io": "^4.2.0"
   }
 }

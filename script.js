@@ -1,3 +1,4 @@
+const { Socket } = require("socket.io");
 
 let canvas = document.getElementById("canvas");
 const ctx = canvas.getContext('2d');
@@ -235,14 +236,16 @@ canvas.addEventListener("mousedown",function(e){
     ctx.stroke();
 
     isPenDown = true;
-
-    pointsObj.push({
+    let point = {
         id: "md",
         x,
         y,
         contextStyle: ctx.strokeStyle,
         contextWidth: ctx.lineWidth
-    });
+    }
+    pointsObj.push(point);
+
+    socket.emit("mousedown",pointsObj);
 
 })
 
@@ -254,16 +257,17 @@ canvas.addEventListener("mousemove",function(e){
     if(isPenDown){
         ctx.lineTo(x,y);
         ctx.stroke();
-
-        pointsObj.push({
+        let point ={
             id: "mm",
             x,
             y,
             contextStyle: ctx.strokeStyle,
             contextWidth: ctx.lineWidth
-        })
+        }
+        pointsObj.push(point);
+
+        socket.emit("mousemove",point);
     }
-    
 })
 
 canvas.addEventListener("mouseup",function(e){
